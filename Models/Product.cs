@@ -1,5 +1,6 @@
 ﻿using Microsoft.Build.Framework;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using RequiredAttribute = System.ComponentModel.DataAnnotations.RequiredAttribute;
 
 namespace ShoppingCart.Models
@@ -14,9 +15,13 @@ namespace ShoppingCart.Models
         public string Slug{ get; set; }
 
         [Required, MinLength(4, ErrorMessage = "Minimum length is 2")]
-
-
         public string Description { get; set; }
+
+        [Required]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Please enter a value")]
+        [Column(TypeName = "decimal(8,2)")]
+
+        
         public decimal Price { get; set; }
         public long CategoryId { get; set; }
         public Category Category { get; set; }
